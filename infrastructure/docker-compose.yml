@@ -1,0 +1,93 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: credit-simulator-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  auth-service:
+    build:
+      context: ../services/auth-service
+      dockerfile: Dockerfile
+    container_name: credit-simulator-auth-service
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_URLS: http://+:5001
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=auth_db;Username=postgres;Password=postgres;IncludeErrorDetail=true
+      Jwt__Key: EsteEsUnJwtKeyMuySeguraYConMasDe32Caracteres
+      Jwt__Issuer: credit-simulator
+      Jwt__Audience: credit-simulator-client
+    ports:
+      - "5001:5001"
+
+  credit-catalog-service:
+    build:
+      context: ../services/credit-catalog-service
+      dockerfile: Dockerfile
+    container_name: credit-simulator-catalog-service
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_URLS: http://+:5002
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=credit_catalog_db;Username=postgres;Password=postgres;IncludeErrorDetail=true
+    ports:
+      - "5002:5002"
+
+  simulation-service:
+    build:
+      context: ../services/simulation-service
+      dockerfile: Dockerfile
+    container_name: credit-simulator-simulation-service
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_URLS: http://+:5003
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=simulation_db;Username=postgres;Password=postgres;IncludeErrorDetail=true
+      Jwt__Key: EsteEsUnJwtKeyMuySeguraYConMasDe32Caracteres
+      Jwt__Issuer: credit-simulator
+      Jwt__Audience: credit-simulator-client
+      CatalogService__BaseUrl: http://credit-catalog-service:5002
+    ports:
+      - "5003:5003"
+
+  frontend:
+    build:
+      context: ../frontend/credit-web
+      dockerfile: Dockerfile
+    container_name: credit-simulator-frontend
+    restart: unless-stopped
+    depends_on:
+      - auth-service
+      - credit-catalog-service
+      - simulation-service
+    environment:
+      VITE_AUTH_URL: http://localhost:5001
+      VITE_CATALOG_URL: http://localhost:5002
+      VITE_SIMULATION_URL: http://localhost:5003
+    ports:
+      - "5173:5173"
+
+volumes:
+  postgres_data:
