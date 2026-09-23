@@ -1,6 +1,8 @@
 -- EJECUTAR EN LA BASE simulation_db.
 -- Tablas para almacenar simulaciones y cuotas generadas por mes.
 
+\connect simulation_db
+
 CREATE TABLE IF NOT EXISTS simulations (
     id SERIAL PRIMARY KEY,
     user_id UUID NOT NULL,

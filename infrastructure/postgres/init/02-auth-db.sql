@@ -1,6 +1,8 @@
 -- EJECUTAR EN LA BASE auth_db.
 -- Tabla de usuarios para autenticación.
 
+\connect auth_db
+
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 CREATE TABLE IF NOT EXISTS users (

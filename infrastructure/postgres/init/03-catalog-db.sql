@@ -1,6 +1,8 @@
 -- EJECUTAR EN LA BASE credit_catalog_db.
 -- Catálogo de tipos de crédito disponibles para la simulación.
 
+\connect credit_catalog_db
+
 CREATE TABLE IF NOT EXISTS credit_types (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE,
