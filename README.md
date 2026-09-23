@@ -30,6 +30,8 @@ docker compose -f infrastructure/docker-compose.yml up -d postgres
 
 Los scripts de `infrastructure/postgres/init` se ejecutan automáticamente en un volumen nuevo. Para ejecuciones manuales, ejecuta `01-create-databases.sql` en la base `postgres`, y después los scripts 02, 03 y 04 respectivamente en `auth_db`, `credit_catalog_db` y `simulation_db`.
 
+Para revisar PostgreSQL con pgAdmin, abre `http://localhost:5050` y entra con `admin@creditsim.com` / `admin123`. Registra el servidor con host `postgres`, puerto `5432`, usuario `postgres` y contraseña `postgres` (desde pgAdmin se usa el nombre del servicio Docker, no `localhost`). Las bases creadas son `auth_db`, `credit_catalog_db` y `simulation_db`.
+
 ## Instalación y ejecución local
 
 Restaurar y ejecutar las APIs en terminales separadas:
@@ -52,13 +54,15 @@ npm install
 npm run dev
 ```
 
-Abre `http://localhost:5173`. Las claves JWT y contraseñas de desarrollo están en `appsettings.Development.json`; usa variables de entorno o un gestor de secretos fuera de desarrollo.
+Abre `http://localhost:5173`; no abras `frontend/credit-web/index.html` con doble clic, porque es la entrada fuente de Vite y necesita su servidor para transformar los módulos React. Las claves JWT y contraseñas de desarrollo están en `appsettings.Development.json`; usa variables de entorno o un gestor de secretos fuera de desarrollo.
 
 ## Docker completo
 
 ```powershell
 docker compose -f infrastructure/docker-compose.yml up --build
 ```
+
+Después abre `http://localhost:5173`. Este comando levanta PostgreSQL, las tres APIs y el frontend; la pantalla de registro crea usuarios en `auth_db`, el catálogo se carga desde `credit_catalog_db` y las simulaciones se guardan en `simulation_db`.
 
 ## Endpoints principales
 

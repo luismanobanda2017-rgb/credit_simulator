@@ -5,9 +5,61 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="theme-color" content="#0f766e" />
 		<title>Credit Simulator</title>
+		<style>
+			:root { color: #173b39; font-family: Georgia, 'Times New Roman', serif; background: #f5f7f2; }
+			* { box-sizing: border-box; }
+			body { margin: 0; min-width: 320px; }
+			.fallback-page { min-height: 100vh; background: radial-gradient(circle at 90% 0%, #d9eee4 0, transparent 34%), #f5f7f2; }
+			.fallback-nav { align-items: center; display: flex; justify-content: space-between; margin: auto; max-width: 1180px; padding: 26px 28px; }
+			.fallback-logo { color: #0e5b52; font-size: 1.45rem; font-weight: bold; letter-spacing: -.03em; }
+			.fallback-logo span { color: #d38b32; }
+			.fallback-badge { border: 1px solid #a9cbbd; border-radius: 99px; color: #477269; font-family: Arial, sans-serif; font-size: .78rem; padding: 9px 14px; }
+			.fallback-main { display: grid; gap: 54px; grid-template-columns: minmax(0, 1.05fr) minmax(330px, .95fr); margin: auto; max-width: 1180px; padding: 64px 28px 80px; }
+			.fallback-copy { align-self: center; }
+			.fallback-kicker { color: #b56f1f; font-family: Arial, sans-serif; font-size: .75rem; font-weight: bold; letter-spacing: .14em; text-transform: uppercase; }
+			.fallback-copy h1 { font-size: clamp(3rem, 7vw, 6.4rem); font-weight: normal; letter-spacing: -.07em; line-height: .9; margin: 18px 0 26px; max-width: 700px; }
+			.fallback-copy h1 em { color: #0b796b; font-style: normal; }
+			.fallback-copy p { color: #647773; font-family: Arial, sans-serif; font-size: 1.05rem; line-height: 1.65; margin: 0; max-width: 510px; }
+			.fallback-points { display: flex; flex-wrap: wrap; gap: 12px 22px; list-style: none; margin: 34px 0 0; padding: 0; }
+			.fallback-points li { color: #477269; font-family: Arial, sans-serif; font-size: .86rem; }
+			.fallback-points li::before { color: #d38b32; content: '●'; margin-right: 8px; }
+			.fallback-card { background: #fff; border: 1px solid #dce8e2; border-radius: 12px; box-shadow: 0 24px 60px #17494018; padding: 30px; }
+			.fallback-card h2 { font-size: 1.55rem; font-weight: normal; margin: 0 0 7px; }
+			.fallback-card > p { color: #71837e; font-family: Arial, sans-serif; font-size: .86rem; margin: 0 0 25px; }
+			.fallback-form { display: grid; gap: 16px; }
+			.fallback-form label { color: #39524d; display: grid; font-family: Arial, sans-serif; font-size: .82rem; font-weight: bold; gap: 7px; }
+			.fallback-form input { background: #fbfdfb; border: 1px solid #c7d9d1; border-radius: 6px; color: #173b39; font-size: 1rem; min-height: 44px; padding: 10px 12px; width: 100%; }
+			.fallback-form input:focus { border-color: #0b8174; outline: 3px solid #0b81741c; }
+			.fallback-row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+			.fallback-button { background: #0b8174; border: 0; border-radius: 6px; color: white; cursor: pointer; font-family: Arial, sans-serif; font-size: .94rem; font-weight: bold; min-height: 46px; margin-top: 4px; padding: 12px 18px; }
+			.fallback-button:hover { background: #08675e; }
+			.fallback-result { background: #edf5f1; border-left: 3px solid #d38b32; color: #285b54; display: none; font-family: Arial, sans-serif; font-size: .9rem; line-height: 1.5; margin-top: 18px; padding: 13px; }
+			.fallback-result.visible { display: block; }
+			@media (max-width: 760px) { .fallback-main { gap: 34px; grid-template-columns: 1fr; padding-top: 34px; } .fallback-copy h1 { font-size: clamp(3.3rem, 16vw, 5rem); } .fallback-card { padding: 22px; } }
+		</style>
 	</head>
 	<body>
-		<div id="root"></div>
+		<div id="root">
+			<div class="fallback-page">
+				<header class="fallback-nav"><div class="fallback-logo">Credit<span>Sim</span></div><div class="fallback-badge">Simulador financiero</div></header>
+				<main class="fallback-main">
+					<section class="fallback-copy"><div class="fallback-kicker">Decisiones con números claros</div><h1>Tu crédito,<br /><em>sin sorpresas.</em></h1><p>Calcula cuotas, compara métodos de amortización y entiende cuánto terminarás pagando antes de tomar una decisión.</p><ul class="fallback-points"><li>Cuota francesa y alemana</li><li>Historial de simulaciones</li><li>Exportación de resultados</li></ul></section>
+					<section class="fallback-card"><h2>Calcula una cuota</h2><p>Prueba la calculadora mientras carga la aplicación completa.</p><form class="fallback-form" id="fallback-form"><label>Monto del crédito<input id="fallback-amount" type="number" min="1" value="10000" required /></label><div class="fallback-row"><label>Tasa anual (%)<input id="fallback-rate" type="number" min="0" step="0.01" value="12" required /></label><label>Plazo (meses)<input id="fallback-months" type="number" min="1" value="12" required /></label></div><button class="fallback-button" type="submit">Calcular cuota estimada</button></form><div class="fallback-result" id="fallback-result"></div></section>
+				</main>
+			</div>
+		</div>
 		<script type="module" src="/src/main.jsx"></script>
+		<script>
+			document.getElementById('fallback-form').addEventListener('submit', function (event) {
+				event.preventDefault();
+				const amount = Number(document.getElementById('fallback-amount').value);
+				const rate = Number(document.getElementById('fallback-rate').value) / 100 / 12;
+				const months = Number(document.getElementById('fallback-months').value);
+				const payment = rate === 0 ? amount / months : amount * rate * Math.pow(1 + rate, months) / (Math.pow(1 + rate, months) - 1);
+				const result = document.getElementById('fallback-result');
+				result.textContent = 'Cuota mensual estimada: ' + payment.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' }) + '. Abre la aplicación con Docker para guardar la simulación en PostgreSQL.';
+				result.classList.add('visible');
+			});
+		</script>
 	</body>
 </html>
