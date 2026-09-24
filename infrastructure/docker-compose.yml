@@ -47,8 +47,24 @@ services:
       Jwt__Key: EsteEsUnJwtKeyMuySeguraYConMasDe32Caracteres
       Jwt__Issuer: credit-simulator
       Jwt__Audience: credit-simulator-client
+      AuditService__BaseUrl: http://login-audit-service:5004/
     ports:
       - "5001:5001"
+
+  login-audit-service:
+    build:
+      context: ../services/login-audit-service
+      dockerfile: Dockerfile
+    container_name: credit-simulator-login-audit-service
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_URLS: http://+:5004
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=login_audit_db;Username=postgres;Password=postgres;IncludeErrorDetail=true
+    ports:
+      - "5004:5004"
 
   credit-catalog-service:
     build:
@@ -96,6 +112,7 @@ services:
       - simulation-service
     environment:
       VITE_AUTH_URL: http://localhost:5001
+      VITE_AUDIT_URL: http://localhost:5004
       VITE_CATALOG_URL: http://localhost:5002
       VITE_SIMULATION_URL: http://localhost:5003
     ports:

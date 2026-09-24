@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1790272623.40742 "c:/Users/User/Documents/GitHub/credit_simulator/ProyectoInforme/main.tex" "main.pdf" "main" 1790272626.63356 0
+["pdflatex"] 1790282871.8841 "c:/Users/User/Documents/GitHub/credit_simulator/ProyectoInforme/main.tex" "main.pdf" "main" 1790282875.25511 2
   "C:/Program Files/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
   "C:/Program Files/MiKTeX/fonts/tfm/adobe/symbol/psyr.tfm" 1136790254 1408 5937f58aa508ea2cea4901c07d10f5fe ""
   "C:/Program Files/MiKTeX/fonts/tfm/adobe/times/psyro.tfm" 1136790254 1544 23a042a74981a3e4b6ce2e350e390409 ""
@@ -14,7 +14,9 @@
   "C:/Program Files/MiKTeX/fonts/tfm/adobe/times/zptmcm7t.tfm" 1136790254 2172 1d00c2a0d10f23031be62329457a870c ""
   "C:/Program Files/MiKTeX/fonts/tfm/adobe/times/zptmcm7v.tfm" 1136790254 1032 20febbd0f0c9a48eb78616f897008286 ""
   "C:/Program Files/MiKTeX/fonts/tfm/adobe/times/zptmcm7y.tfm" 1136790254 1520 ad7b3c1a480a03b3e41b5fbb13d938f2 ""
+  "C:/Program Files/MiKTeX/fonts/tfm/jknappen/ec/ecrb1440.tfm" 993062102 3208 d800ff1aa4d83da50182e01d6bffba98 ""
   "C:/Program Files/MiKTeX/fonts/tfm/jknappen/ec/ecrm1200.tfm" 993062126 3152 4850ff0163852b7fab34bd55e1197f28 ""
+  "C:/Program Files/MiKTeX/fonts/tfm/jknappen/ec/ecrm1440.tfm" 993062128 3168 3bd7b08ba4330af81521911744311212 ""
   "C:/Program Files/MiKTeX/fonts/tfm/jknappen/ec/ectt1200.tfm" 993062344 1348 c48a0620e07683860afba1730adf9e53 ""
   "C:/Program Files/MiKTeX/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1233951854 916 f87d7c45f9c908e672703b83b72241a3 ""
   "C:/Program Files/MiKTeX/fonts/tfm/public/amsfonts/symbols/msbm10.tfm" 1233951854 908 2921f8a10601f252058503cc6570e581 ""
@@ -208,16 +210,17 @@
   "C:/Program Files/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Program Files/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "C:/Users/User/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1788028290 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
+  "C:/Users/User/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1200.pk" 1787541998 28440 2cb1f40ce0f40543ea4d5801e509ba67 ""
   "C:/Users/User/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ectt1200.pk" 1788561800 24152 e565b14efe4243aa535d1128cb57c07f ""
   "C:/Users/User/AppData/Local/MiKTeX/fonts/tfm/public/rsfs/rsfs10.tfm" 1788561284 688 37338d6ab346c2f1466b29e195316aa4 ""
   "C:/Users/User/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1788028345 13357494 4ae3a23e10193ef1b918267d3b2e275e ""
   "assets/img1.png" 1790272121 90030 bf56e3feb41c23f13afbbf1f99a4d3e1 ""
   "assets/logo_fisei.png" 1787948221 101467 945842f3a55bfbd4fde722e1fa4ec42c ""
   "assets/logo_uta.png" 1787948221 134825 4d300dacc47271080538e4a7e59aa92c ""
-  "c:/Users/User/Documents/GitHub/credit_simulator/ProyectoInforme/main.tex" 1790272621 28794 1c678eddb68731996eec91f41cf01214 ""
-  "main.aux" 1790272626 6033 459b2f302fc497629640b2d171d3a200 "pdflatex"
-  "main.out" 1790272626 5756 3f444e0df02cf62e0397c0550157dc1c "pdflatex"
-  "main.tex" 1790272621 28794 1c678eddb68731996eec91f41cf01214 ""
+  "c:/Users/User/Documents/GitHub/credit_simulator/ProyectoInforme/main.tex" 1790282871 28803 d79380c83aacf1e5b3714ac6d7b80e70 ""
+  "main.aux" 1790282874 6037 20c7f0746d4b278f86990d960fc574c7 "pdflatex"
+  "main.out" 1790282874 5756 3f444e0df02cf62e0397c0550157dc1c "pdflatex"
+  "main.tex" 1790282871 28803 d79380c83aacf1e5b3714ac6d7b80e70 ""
   (generated)
   "main.aux"
   "main.log"

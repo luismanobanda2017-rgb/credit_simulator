@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import CreditTypeSelect from './CreditTypeSelect';
 
-const money = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'USD' });
+const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
 
 export default function CreditForm({ onSubmit, loading }) {
 	const [form, setForm] = useState({ creditTypeId: '', amount: '', months: '', method: 'French' }); const [type, setType] = useState(null); const [error, setError] = useState('');

@@ -5,6 +5,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="theme-color" content="#0f766e" />
 		<title>Credit Simulator</title>
+
+
+		
 		<style>
 			:root { color: #173b39; font-family: Georgia, 'Times New Roman', serif; background: #f5f7f2; }
 			* { box-sizing: border-box; }
@@ -57,7 +60,7 @@
 				const months = Number(document.getElementById('fallback-months').value);
 				const payment = rate === 0 ? amount / months : amount * rate * Math.pow(1 + rate, months) / (Math.pow(1 + rate, months) - 1);
 				const result = document.getElementById('fallback-result');
-				result.textContent = 'Cuota mensual estimada: ' + payment.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' }) + '. Abre la aplicación con Docker para guardar la simulación en PostgreSQL.';
+				result.textContent = 'Cuota mensual estimada: ' + payment.toLocaleString('es-ES', { style: 'currency', currency: 'USD' }) + '. Abre la aplicación con Docker para guardar la simulación en PostgreSQL.';
 				result.classList.add('visible');
 			});
 		</script>

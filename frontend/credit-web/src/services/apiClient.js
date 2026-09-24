@@ -17,5 +17,6 @@ const createClient = (baseURL) => {
 };
 
 export const authClient = createClient(import.meta.env.VITE_AUTH_URL || 'http://localhost:5001');
+export const auditClient = createClient(import.meta.env.VITE_AUDIT_URL || 'http://localhost:5004');
 export const catalogClient = createClient(import.meta.env.VITE_CATALOG_URL || 'http://localhost:5002');
 export const simulationClient = createClient(import.meta.env.VITE_SIMULATION_URL || 'http://localhost:5003');

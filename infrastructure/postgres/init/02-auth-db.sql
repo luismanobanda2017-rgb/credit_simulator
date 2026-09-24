@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(100) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
     password_hash TEXT NOT NULL,
+    status SMALLINT NOT NULL DEFAULT 1 CHECK (status IN (0, 1)),
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 

@@ -10,6 +10,11 @@ var jwt = builder.Configuration.GetSection("Jwt");
 var jwtKey = jwt["Key"] ?? throw new InvalidOperationException("Jwt:Key is required.");
 
 builder.Services.AddDbContext<AuthDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddHttpClient<LoginAuditClient>(client =>
+{
+	client.BaseAddress = new Uri(builder.Configuration["AuditService:BaseUrl"] ?? "http://localhost:5004/");
+	client.Timeout = TimeSpan.FromSeconds(2);
+});
 builder.Services.AddScoped<JwtTokenService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -31,6 +36,21 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+	var db = scope.ServiceProvider.GetRequiredService<AuthDbContext>();
+	await db.Database.ExecuteSqlRawAsync("""
+		DO $$
+		BEGIN
+			IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'users' AND column_name = 'status' AND data_type = 'boolean') THEN
+				ALTER TABLE users ALTER COLUMN status DROP DEFAULT;
+				ALTER TABLE users ALTER COLUMN status TYPE SMALLINT USING CASE WHEN status THEN 1 ELSE 0 END;
+			END IF;
+			ALTER TABLE users ALTER COLUMN status SET DEFAULT 1;
+		END $$;
+		""");
+	await db.Database.ExecuteSqlRawAsync("ALTER TABLE users DROP COLUMN IF EXISTS failed_login_attempts;");
+}
 if (app.Environment.IsDevelopment())
 {
 	app.UseSwagger();

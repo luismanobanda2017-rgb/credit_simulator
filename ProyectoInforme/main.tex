@@ -47,10 +47,10 @@
 }
 
 % Títulos de sección con color y línea
+% Títulos de sección sin línea
 \titleformat{\section}
     {\Large\bfseries\color{black}}
-  {\thesection.}{0.5em}{}[\vspace{-0.6em}\color{celeste}\titlerule]
-\titleformat{\subsection}
+  {\thesection.}{0.5em}{}{\subsection}
     {\large\bfseries\color{black}}
   {\thesubsection}{0.5em}{}
 \titlespacing*{\section}{0pt}{1.2em}{0.6em}
@@ -415,15 +415,15 @@ interés, $A_k$ es el abono a capital y $S_k$ es el saldo restante. En la
 implementación del simulador, estos valores se calculan periodo a periodo y se
 guardan en la tabla de amortización.
 
-Como ejemplo, para un préstamo de $10\,000$ euros a cuatro años con una tasa
+Como ejemplo, para un préstamo de $10\,000$ dólares a cuatro años con una tasa
 anual del $6\%$ y pagos anuales, la tasa periódica es $i=0.06$ y $n=4$. La
 cuota aproximada es:
 \[
 C = \frac{10\,000 \cdot 0.06}{1-(1+0.06)^{-4}}
-    \approx 2\,885.91\ \text{euros}.
+    \approx 2\,885.91\ \text{dólares}.
 \]
-La primera cuota contiene $600.00$ euros de intereses y aproximadamente
-$2\,285.91$ euros de amortización. En los periodos siguientes los intereses
+La primera cuota contiene $600.00$ dólares de intereses y aproximadamente
+$2\,285.91$ dólares de amortización. En los periodos siguientes los intereses
 disminuyen y el abono a capital aumenta, mientras la cuota permanece fija.
 
 \subsection{Método alemán}
@@ -445,10 +445,10 @@ I_k = S_{k-1} \cdot i, \qquad
 S_k = S_{k-1} - A.
 \]
 
-Por ejemplo, para un capital de $10\,000$ euros a cuatro periodos, la
-amortización de capital es $A=2\,500$ euros por periodo. Con una tasa del $6\%$,
-la primera cuota es $3\,100$ euros ($2\,500+600$), la segunda es $2\,950$ euros,
-la tercera es $2\,800$ euros y la cuarta es $2\,650$ euros. La cuota baja porque
+Por ejemplo, para un capital de $10\,000$ dólares a cuatro periodos, la
+amortización de capital es $A=2\,500$ dólares por periodo. Con una tasa del $6\%$,
+la primera cuota es $3\,100$ dólares ($2\,500+600$), la segunda es $2\,950$ dólares,
+la tercera es $2\,800$ dólares y la cuarta es $2\,650$ dólares. La cuota baja porque
 los intereses se calculan cada vez sobre un saldo menor, aunque el abono a
 capital permanece constante.
 

@@ -9,3 +9,6 @@ WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'credit_catalog_db')\g
 
 SELECT 'CREATE DATABASE simulation_db OWNER postgres'
 WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'simulation_db')\gexec
+
+SELECT 'CREATE DATABASE login_audit_db OWNER postgres'
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'login_audit_db')\gexec
