@@ -1,0 +1,22 @@
+	Los 4 Valores del Manifiesto Ágil
+Individuos e Interacciones
+Software Funcionando
+Colaboración con el Cliente
+Respuesta ante el Cambio
+
+	Los 12 principios del Manifiesto Ágil
+Satisfacción del Cliente
+Aceptar el Cambio
+Entregar Software Funcional
+Colaboración
+Motivación
+Conversación Cara a Cara
+Medir el Progreso según el Software Funcional
+Mantener un Ritmo Constante
+Monitoreo
+Simplicidad
+Equipos Autoorganizados
+Revisar el Trabajo Regularmente
+
+
+3vlans 3 swtich y agregar un router

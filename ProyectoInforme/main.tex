@@ -1,0 +1,419 @@
+% Plantilla LaTeX para Informe de Proyecto
+% Tema: Credit Simulator – Proyecto en Pareja (Metodologías Ágiles)
+% Versión SIN índice (tableofcontents eliminado)
+
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{mathptmx}
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=3cm,right=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{ragged2e}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{url}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage[most]{tcolorbox}
+\usepackage{fontawesome5}
+\usepackage{hyperref}
+
+% Configuración de espaciado
+\onehalfspacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.3cm}
+\setlength{\emergencystretch}{2em}
+\renewcommand{\arraystretch}{1.3}
+
+% Paleta de colores
+\definecolor{azulUTA}{HTML}{1F3A5F}
+\definecolor{celeste}{HTML}{2E86AB}
+\definecolor{grisClaro}{HTML}{F2F5F9}
+
+% Configuración de hipervínculos
+\hypersetup{
+    colorlinks=true,
+    linkcolor=celeste,
+    urlcolor=celeste,
+    citecolor=celeste
+}
+
+% Títulos de sección con color y línea
+\titleformat{\section}
+  {\Large\bfseries\color{azulUTA}}
+  {\thesection.}{0.5em}{}[\vspace{-0.6em}\color{celeste}\titlerule]
+\titleformat{\subsection}
+  {\large\bfseries\color{celeste}}
+  {\thesubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{1.2em}{0.6em}
+
+% Encabezado y pie de página
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{azulUTA}{\textbf{Credit Simulator}}}
+\fancyhead[R]{\small\textcolor{gray}{Metodologías Ágiles}}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{celeste}\leaders\hrule height \headrulewidth\hfill}}
+
+% Marca de contenido pendiente
+% Nota: \faPencilAlt va fuera de \textit para evitar warnings de fontawesome5 en cursiva.
+\DeclareRobustCommand{\Pendiente}[1]{%
+  \begingroup\setlength{\fboxsep}{3pt}%
+  \colorbox{grisClaro}{\textcolor{gray}{\faPencilAlt\ \textit{Pendiente: #1}}}%
+  \endgroup}
+
+% ---------------------------------------------------------------------------
+% DATOS DEL PROYECTO
+% ---------------------------------------------------------------------------
+\newcommand{\TituloCaso}{INFORME DE PROYECTO}
+\newcommand{\SubtituloCaso}{CREDIT SIMULATOR}
+% Se usa \par (no \\) para separar integrantes dentro de \newcommand.
+\newcommand{\Estudiante}{Manobanda Luis \par [Nombre del compañero/a]}
+\newcommand{\Asignatura}{Metodologías Ágiles}
+\newcommand{\Docente}{Ing. Hernán Fabricio Naranjo Ávalos, Mg.}
+\newcommand{\Carrera}{Ingeniería en Software}
+\newcommand{\Semestre}{Cuarto - "B"}
+\newcommand{\CicloAcademico}{JULIO -- DICIEMBRE 2026}
+\newcommand{\Fecha}{[Fecha de entrega]}
+
+% ---------------------------------------------------------------------------
+% INICIO DEL DOCUMENTO
+% ---------------------------------------------------------------------------
+\begin{document}
+
+% -------------------- PORTADA --------------------
+\begin{titlepage}
+    \thispagestyle{empty}
+    \singlespacing
+    \begin{center}
+        \begin{minipage}[c]{0.25\textwidth}
+            \centering\includegraphics[width=2.5cm]{assets/logo_uta.png}
+        \end{minipage}%
+        \hfill
+        \begin{minipage}[c]{0.25\textwidth}
+            \centering\includegraphics[width=2.5cm]{assets/logo_fisei.png}
+        \end{minipage}
+
+        \vspace{0.4cm}
+
+        {\large \textbf{UNIVERSIDAD TÉCNICA DE AMBATO}}
+
+        {\large \textbf{FACULTAD DE INGENIERÍA EN SISTEMAS ELECTRÓNICA E INDUSTRIAL}}
+
+        {\large \textbf{CARRERA DE INGENIERÍA EN SOFTWARE}}
+
+        \vspace{1.0cm}
+
+        \begin{tcolorbox}[colback=azulUTA, colframe=celeste, boxrule=1.2pt,
+                          arc=4pt, halign=center, left=8pt, right=8pt, top=8pt, bottom=8pt]
+          {\LARGE\bfseries\color{white}\TituloCaso}\\[0.3cm]
+          {\huge\bfseries\color{white}\SubtituloCaso}
+        \end{tcolorbox}
+
+        \vspace{1.0cm}
+
+        {\large \textbf{INTEGRANTES:}}
+
+        {\large \Estudiante}
+
+        \vspace{0.3cm}
+
+        {\large \textbf{ASIGNATURA:} \Asignatura}
+
+        {\large \textbf{DOCENTE:} \Docente}
+
+        {\large \textbf{CARRERA:} \Carrera}
+
+        {\large \textbf{SEMESTRE:} \Semestre}
+
+        \vspace{0.3cm}
+
+        {\large \textbf{CICLO ACADÉMICO:} \CicloAcademico}
+
+        \vspace{0.2cm}
+
+        {\large \textbf{FECHA:} \Fecha}
+
+        \vspace{0.8cm}
+
+        \textcolor{celeste}{\rule{10cm}{1.2pt}}
+
+        \vspace{0.2cm}
+
+        {\small Ambato - Ecuador}
+    \end{center}
+\end{titlepage}
+
+% -------------------- CONTENIDO --------------------
+% (Sin \tableofcontents, sin \listoffigures, sin \listoftables)
+\newpage
+
+% =========================================================================
+\section{Introducción}
+
+\Pendiente{breve párrafo sobre el proyecto, su propósito académico y cómo se aplicó la metodología ágil}
+
+% =========================================================================
+\section{Descripción del proyecto}
+
+\subsection{Resumen}
+
+Credit Simulator es una aplicación web que permite calcular y visualizar la tabla de amortización de un crédito según su tipo (personal, hipotecario, vehicular, educativo o PyME). El usuario inicia sesión, selecciona el tipo de crédito, ingresa el monto y el plazo en meses, y elige el método de amortización: \textbf{francés} (cuota fija) o \textbf{alemán} (cuota decreciente). El sistema obtiene la tasa correspondiente, calcula la tabla completa (cuota, interés, abono a capital y saldo por mes), la guarda en la base de datos y permite consultarla y descargarla como reporte.
+
+\subsection{Objetivo general}
+
+\Pendiente{objetivo general del proyecto}
+
+\subsection{Objetivos específicos}
+
+\begin{itemize}[leftmargin=*]
+    \item \Pendiente{objetivo específico 1}
+    \item \Pendiente{objetivo específico 2}
+    \item \Pendiente{objetivo específico 3}
+\end{itemize}
+
+\subsection{Alcance}
+
+\Pendiente{qué incluye y qué no incluye el proyecto (por ejemplo: sin manejo de roles)}
+
+% =========================================================================
+\section{Metodología ágil aplicada}
+
+\subsection{Marco de trabajo}
+
+\Pendiente{indicar si se usó Scrum, Kanban o Scrumban y justificar la elección}
+
+\subsection{Roles del equipo}
+
+\begin{table}[H]
+\centering
+\caption{Roles del equipo de trabajo}
+\rowcolors{2}{grisClaro}{white}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{4cm} >{\raggedright\arraybackslash}p{4cm} X}
+\toprule
+\rowcolor{azulUTA}
+\textcolor{white}{\textbf{Integrante}} & \textcolor{white}{\textbf{Rol}} & \textcolor{white}{\textbf{Responsabilidades}} \\
+\midrule
+Manobanda Luis & \Pendiente{rol} & \Pendiente{responsabilidades} \\
+{[}Compañero/a{]} & \Pendiente{rol} & \Pendiente{responsabilidades} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Product Backlog}
+
+\begin{table}[H]
+\centering
+\caption{Historias de usuario del Product Backlog}
+\rowcolors{2}{grisClaro}{white}
+\begin{tabularx}{\textwidth}{>{\centering\arraybackslash}p{1.4cm} X >{\centering\arraybackslash}p{2cm} >{\centering\arraybackslash}p{2cm}}
+\toprule
+\rowcolor{azulUTA}
+\textcolor{white}{\textbf{ID}} & \textcolor{white}{\textbf{Historia de usuario}} & \textcolor{white}{\textbf{Prioridad}} & \textcolor{white}{\textbf{Sprint}} \\
+\midrule
+HU-01 & \Pendiente{Como usuario quiero registrarme...} & & \\
+HU-02 & \Pendiente{Como usuario quiero iniciar sesión...} & & \\
+HU-03 & \Pendiente{Como usuario quiero elegir un tipo de crédito...} & & \\
+HU-04 & \Pendiente{Como usuario quiero simular con método francés...} & & \\
+HU-05 & \Pendiente{Como usuario quiero simular con método alemán...} & & \\
+HU-06 & \Pendiente{Como usuario quiero consultar mi historial...} & & \\
+HU-07 & \Pendiente{Como usuario quiero descargar la tabla...} & & \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Planificación de Sprints}
+
+\begin{table}[H]
+\centering
+\caption{Resumen de Sprints}
+\rowcolors{2}{grisClaro}{white}
+\begin{tabularx}{\textwidth}{>{\centering\arraybackslash}p{2cm} >{\centering\arraybackslash}p{3cm} X}
+\toprule
+\rowcolor{azulUTA}
+\textcolor{white}{\textbf{Sprint}} & \textcolor{white}{\textbf{Fechas}} & \textcolor{white}{\textbf{Objetivo y entregable}} \\
+\midrule
+Sprint 1 & \Pendiente{fechas} & \Pendiente{objetivo} \\
+Sprint 2 & \Pendiente{fechas} & \Pendiente{objetivo} \\
+Sprint 3 & \Pendiente{fechas} & \Pendiente{objetivo} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Ceremonias y evidencias}
+
+\Pendiente{describir planificación, reuniones diarias, revisión y retrospectiva; adjuntar capturas del tablero Kanban/Scrum}
+
+% =========================================================================
+\section{Arquitectura del sistema}
+
+\subsection{Arquitectura de microservicios}
+
+El sistema está construido bajo una arquitectura de microservicios. Cada servicio es una aplicación independiente con su propia base de datos, y ningún servicio accede directamente a la base de otro.
+
+\begin{table}[H]
+\centering
+\caption{Microservicios del sistema}
+\rowcolors{2}{grisClaro}{white}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{4cm} X >{\raggedright\arraybackslash}p{3.5cm}}
+\toprule
+\rowcolor{azulUTA}
+\textcolor{white}{\textbf{Microservicio}} & \textcolor{white}{\textbf{Responsabilidad}} & \textcolor{white}{\textbf{Base de datos}} \\
+\midrule
+Auth Service & Login y registro de usuarios & auth\_db \\
+Credit Catalog Service & Catálogo de tipos de crédito y sus tasas de interés & credit\_catalog\_db \\
+Simulation Service & Cálculo de amortización (francés/alemán) e historial & simulation\_db \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+El Simulation Service consulta la tasa de interés al Credit Catalog Service mediante HTTP, respetando el principio de que cada microservicio solo accede a su propia base de datos.
+
+\subsection{Diagrama de arquitectura}
+
+\Pendiente{insertar diagrama de arquitectura (frontend, tres microservicios, tres bases de datos)}
+
+\subsection{Diagrama de base de datos}
+
+\Pendiente{insertar diagramas entidad-relación de auth\_db, credit\_catalog\_db y simulation\_db}
+
+% =========================================================================
+\section{Tecnologías utilizadas}
+
+\begin{table}[H]
+\centering
+\caption{Stack tecnológico}
+\rowcolors{2}{grisClaro}{white}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.5cm} X}
+\toprule
+\rowcolor{azulUTA}
+\textcolor{white}{\textbf{Capa}} & \textcolor{white}{\textbf{Tecnologías}} \\
+\midrule
+Frontend & React (JavaScript), Vite, React Router, Axios, HTML5 y CSS3 \\
+Backend & C\# con .NET 10 (ASP.NET Core Web API), Entity Framework Core \\
+Seguridad & BCrypt (hash de contraseñas), JWT (manejo de sesión) \\
+Base de datos & PostgreSQL (tres bases independientes, inicializadas con scripts SQL) y pgAdmin 4 \\
+Infraestructura & Docker y Docker Compose \\
+Control de versiones & Git y GitHub \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% =========================================================================
+\section{Requerimientos}
+
+\subsection{Requerimientos funcionales}
+
+\begin{itemize}[leftmargin=*]
+    \item \Pendiente{RF-01: registro de usuarios}
+    \item \Pendiente{RF-02: inicio de sesión}
+    \item \Pendiente{RF-03: selección de tipo de crédito}
+    \item \Pendiente{RF-04: cálculo por método francés}
+    \item \Pendiente{RF-05: cálculo por método alemán}
+    \item \Pendiente{RF-06: historial de simulaciones}
+    \item \Pendiente{RF-07: reporte descargable de la tabla}
+\end{itemize}
+
+\subsection{Requerimientos no funcionales}
+
+\begin{itemize}[leftmargin=*]
+    \item \Pendiente{RNF-01: seguridad (contraseñas con hash, sesión con JWT)}
+    \item \Pendiente{RNF-02: independencia de bases de datos por microservicio}
+    \item \Pendiente{RNF-03: usabilidad y diseño responsivo}
+\end{itemize}
+
+% =========================================================================
+\section{Diseño y modelo de amortización}
+
+\subsection{Método francés}
+
+Cuota fija durante todo el plazo. Con capital $P$, tasa mensual $i$ y plazo $n$ meses:
+\[
+C = \frac{P \cdot i}{1 - (1+i)^{-n}}
+\]
+
+\subsection{Método alemán}
+
+Abono a capital constante y cuota decreciente:
+\[
+A = \frac{P}{n}, \qquad C_k = A + S_{k-1} \cdot i
+\]
+donde $S_{k-1}$ es el saldo del período anterior.
+
+\subsection{Casos de prueba}
+
+\Pendiente{tabla con casos de prueba y resultados esperados vs. obtenidos}
+
+% =========================================================================
+\section{Implementación}
+
+\subsection{Estructura del repositorio}
+
+\Pendiente{describir la estructura de carpetas: frontend, services, infrastructure}
+
+\subsection{Configuración local}
+
+\Pendiente{pasos para crear las bases en pgAdmin, ejecutar scripts SQL y levantar servicios y frontend}
+
+\subsection{Capturas de pantalla}
+
+\Pendiente{login, registro, simulador, tabla de amortización, historial y reporte descargado}
+
+% =========================================================================
+\section{Pruebas}
+
+\Pendiente{pruebas realizadas por servicio (Swagger/Postman) y pruebas de punta a punta}
+
+% =========================================================================
+\section{Trabajo colaborativo y control de versiones}
+
+\Pendiente{estrategia de ramas en Git, distribución de tareas entre la pareja y evidencias de commits}
+
+% =========================================================================
+\section{Retrospectiva y lecciones aprendidas}
+
+\Pendiente{qué funcionó bien, qué mejorar y cómo se aplicaron los valores y principios del Manifiesto Ágil}
+
+% =========================================================================
+\section{Conclusiones y recomendaciones}
+
+\subsection{Conclusiones}
+
+\Pendiente{conclusiones del proyecto}
+
+\subsection{Recomendaciones}
+
+\Pendiente{recomendaciones para futuras mejoras}
+
+% =========================================================================
+\section*{Referencias Bibliográficas}
+
+\urlstyle{rm}
+\sloppy
+\begin{enumerate}[label={[\arabic*]}, leftmargin=*, rightmargin=0pt, before=\RaggedRight]
+    \item \Pendiente{Referencia 1}
+    \item \Pendiente{Referencia 2}
+    \item \Pendiente{Referencia 3}
+\end{enumerate}
+
+% =========================================================================
+\appendix
+\section{Anexos}
+
+\Pendiente{capturas del tablero ágil, scripts SQL y evidencias}
+
+Repositorio del proyecto: \url{https://github.com/[usuario]/credit_simulator}
+
+\end{document}
