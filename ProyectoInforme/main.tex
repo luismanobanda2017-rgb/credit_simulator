@@ -26,7 +26,6 @@
 \usepackage{titlesec}
 \usepackage{fancyhdr}
 \usepackage[most]{tcolorbox}
-\usepackage{fontawesome5}
 \usepackage{hyperref}
 
 % Configuración de espaciado
@@ -37,24 +36,22 @@
 \renewcommand{\arraystretch}{1.3}
 
 % Paleta de colores
-\definecolor{azulUTA}{HTML}{1F3A5F}
-\definecolor{celeste}{HTML}{2E86AB}
-\definecolor{grisClaro}{HTML}{F2F5F9}
+\definecolor{azulUTA}{HTML}{000000}
+\definecolor{celeste}{HTML}{000000}
+\definecolor{grisClaro}{HTML}{F2F2F2}
 
 % Configuración de hipervínculos
 \hypersetup{
-    colorlinks=true,
-    linkcolor=celeste,
-    urlcolor=celeste,
-    citecolor=celeste
+    colorlinks=false,
+    hidelinks
 }
 
 % Títulos de sección con color y línea
 \titleformat{\section}
-  {\Large\bfseries\color{azulUTA}}
+    {\Large\bfseries\color{black}}
   {\thesection.}{0.5em}{}[\vspace{-0.6em}\color{celeste}\titlerule]
 \titleformat{\subsection}
-  {\large\bfseries\color{celeste}}
+    {\large\bfseries\color{black}}
   {\thesubsection}{0.5em}{}
 \titlespacing*{\section}{0pt}{1.2em}{0.6em}
 
@@ -62,17 +59,11 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small\textcolor{azulUTA}{\textbf{Credit Simulator}}}
-\fancyhead[R]{\small\textcolor{gray}{Metodologías Ágiles}}
+\fancyhead[R]{\small\textcolor{black}{Metodologías Ágiles}}
 \fancyfoot[C]{\small\thepage}
+\setlength{\headheight}{25pt}
 \renewcommand{\headrulewidth}{0.6pt}
-\renewcommand{\headrule}{\hbox to\headwidth{\color{celeste}\leaders\hrule height \headrulewidth\hfill}}
-
-% Marca de contenido pendiente
-% Nota: \faPencilAlt va fuera de \textit para evitar warnings de fontawesome5 en cursiva.
-\DeclareRobustCommand{\Pendiente}[1]{%
-  \begingroup\setlength{\fboxsep}{3pt}%
-  \colorbox{grisClaro}{\textcolor{gray}{\faPencilAlt\ \textit{Pendiente: #1}}}%
-  \endgroup}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{black}\leaders\hrule height \headrulewidth\hfill}}
 
 % ---------------------------------------------------------------------------
 % DATOS DEL PROYECTO
@@ -80,13 +71,13 @@
 \newcommand{\TituloCaso}{INFORME DE PROYECTO}
 \newcommand{\SubtituloCaso}{CREDIT SIMULATOR}
 % Se usa \par (no \\) para separar integrantes dentro de \newcommand.
-\newcommand{\Estudiante}{Manobanda Luis \par [Nombre del compañero/a]}
+\newcommand{\Estudiante}{Manobanda Luis \par Redroban Joselyn}
 \newcommand{\Asignatura}{Metodologías Ágiles}
 \newcommand{\Docente}{Ing. Hernán Fabricio Naranjo Ávalos, Mg.}
 \newcommand{\Carrera}{Ingeniería en Software}
 \newcommand{\Semestre}{Cuarto - "B"}
 \newcommand{\CicloAcademico}{JULIO -- DICIEMBRE 2026}
-\newcommand{\Fecha}{[Fecha de entrega]}
+\newcommand{\Fecha}{24/09/2026}
 
 % ---------------------------------------------------------------------------
 % INICIO DEL DOCUMENTO
@@ -163,7 +154,18 @@
 % =========================================================================
 \section{Introducción}
 
-\Pendiente{breve párrafo sobre el proyecto, su propósito académico y cómo se aplicó la metodología ágil}
+Credit Simulator es un proyecto académico orientado a la simulación de préstamos
+mediante una aplicación web sencilla y accesible. Su propósito es mostrar de
+forma clara cuánto se pagará en un crédito y cómo cambia el saldo durante el
+tiempo, considerando los métodos francés y alemán. El usuario puede ingresar,
+seleccionar un producto financiero, comparar el resultado de la amortización y
+guardar la simulación para consultarla después.
+
+El desarrollo se organizó con una metodología ágil adaptada al tamaño del
+equipo. Se dividieron las funcionalidades en historias de usuario, se trabajó
+por entregas incrementales y se revisó el funcionamiento de cada parte antes
+de integrarla. Así, el proyecto avanzó desde la autenticación y el catálogo
+hasta el cálculo, el historial y la exportación de reportes.
 
 % =========================================================================
 \section{Descripción del proyecto}
@@ -174,26 +176,43 @@ Credit Simulator es una aplicación web que permite calcular y visualizar la tab
 
 \subsection{Objetivo general}
 
-\Pendiente{objetivo general del proyecto}
+Desarrollar una aplicación web de simulación de créditos que permita calcular
+tablas de amortización mediante los métodos francés y alemán, guardar los
+resultados asociados al usuario y exportarlos en formatos de uso común.
 
 \subsection{Objetivos específicos}
 
 \begin{itemize}[leftmargin=*]
-    \item \Pendiente{objetivo específico 1}
-    \item \Pendiente{objetivo específico 2}
-    \item \Pendiente{objetivo específico 3}
+    \item Implementar registro e inicio de sesión con contraseñas protegidas y tokens JWT.
+    \item Organizar el catálogo de productos con tasas, montos mínimos, montos máximos y plazos máximos.
+    \item Calcular cuotas, intereses, abonos a capital y saldos para los métodos francés y alemán.
+    \item Guardar las simulaciones y permitir al usuario consultar su historial y el detalle de cada resultado.
+    \item Generar reportes de la tabla de amortización en PDF, Excel y CSV.
 \end{itemize}
 
 \subsection{Alcance}
 
-\Pendiente{qué incluye y qué no incluye el proyecto (por ejemplo: sin manejo de roles)}
+El sistema incluye registro, autenticación, selección de cinco tipos de crédito
+(Personal, Hipotecario, Vehicular, Educativo y PyME), validación de rangos,
+simulación con dos métodos de amortización, almacenamiento del historial,
+consulta del detalle y exportación de reportes. La interfaz está construida
+con React y las API están separadas por responsabilidad.
+
+El alcance no incluye aprobación bancaria, desembolso real, conexión con una
+entidad financiera, manejo de roles administrativos, pagos reales, seguros,
+comisiones, moras ni cambios de tasas en el tiempo. Las tasas y los límites
+utilizados corresponden al catálogo de datos inicial del proyecto.
 
 % =========================================================================
 \section{Metodología ágil aplicada}
 
 \subsection{Marco de trabajo}
 
-\Pendiente{indicar si se usó Scrum, Kanban o Scrumban y justificar la elección}
+Se utilizó Scrum de forma adaptada. El equipo organizó el trabajo en un
+product backlog, priorizó las funcionalidades principales y las distribuyó en
+incrementos cortos. Esta elección permitió entregar primero el acceso y la
+estructura base, después el cálculo de créditos y finalmente el historial y
+los reportes, manteniendo una revisión frecuente del resultado.
 
 \subsection{Roles del equipo}
 
@@ -206,8 +225,8 @@ Credit Simulator es una aplicación web que permite calcular y visualizar la tab
 \rowcolor{azulUTA}
 \textcolor{white}{\textbf{Integrante}} & \textcolor{white}{\textbf{Rol}} & \textcolor{white}{\textbf{Responsabilidades}} \\
 \midrule
-Manobanda Luis & \Pendiente{rol} & \Pendiente{responsabilidades} \\
-{[}Compañero/a{]} & \Pendiente{rol} & \Pendiente{responsabilidades} \\
+Manobanda Luis & Desarrollo y análisis & Diseño de la solución, implementación de servicios y cálculos de amortización, integración con PostgreSQL y documentación. \\
+Redroban Joselyn & Desarrollo y pruebas & Construcción de la interfaz React, integración con las API, revisión de flujos de usuario, pruebas funcionales y apoyo en la documentación. \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -223,13 +242,13 @@ Manobanda Luis & \Pendiente{rol} & \Pendiente{responsabilidades} \\
 \rowcolor{azulUTA}
 \textcolor{white}{\textbf{ID}} & \textcolor{white}{\textbf{Historia de usuario}} & \textcolor{white}{\textbf{Prioridad}} & \textcolor{white}{\textbf{Sprint}} \\
 \midrule
-HU-01 & \Pendiente{Como usuario quiero registrarme...} & & \\
-HU-02 & \Pendiente{Como usuario quiero iniciar sesión...} & & \\
-HU-03 & \Pendiente{Como usuario quiero elegir un tipo de crédito...} & & \\
-HU-04 & \Pendiente{Como usuario quiero simular con método francés...} & & \\
-HU-05 & \Pendiente{Como usuario quiero simular con método alemán...} & & \\
-HU-06 & \Pendiente{Como usuario quiero consultar mi historial...} & & \\
-HU-07 & \Pendiente{Como usuario quiero descargar la tabla...} & & \\
+HU-01 & Como usuario quiero registrarme para acceder a mis simulaciones. & Alta & 1 \\
+HU-02 & Como usuario quiero iniciar sesión para utilizar el simulador. & Alta & 1 \\
+HU-03 & Como usuario quiero elegir un tipo de crédito y conocer sus límites. & Alta & 2 \\
+HU-04 & Como usuario quiero simular con el método francés para obtener una cuota fija. & Alta & 2 \\
+HU-05 & Como usuario quiero simular con el método alemán para observar cuotas decrecientes. & Alta & 2 \\
+HU-06 & Como usuario quiero consultar mi historial y revisar el detalle de una simulación. & Media & 3 \\
+HU-07 & Como usuario quiero descargar la tabla en PDF, Excel o CSV. & Media & 3 \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -245,16 +264,22 @@ HU-07 & \Pendiente{Como usuario quiero descargar la tabla...} & & \\
 \rowcolor{azulUTA}
 \textcolor{white}{\textbf{Sprint}} & \textcolor{white}{\textbf{Fechas}} & \textcolor{white}{\textbf{Objetivo y entregable}} \\
 \midrule
-Sprint 1 & \Pendiente{fechas} & \Pendiente{objetivo} \\
-Sprint 2 & \Pendiente{fechas} & \Pendiente{objetivo} \\
-Sprint 3 & \Pendiente{fechas} & \Pendiente{objetivo} \\
+Sprint 1 & Análisis y base & Crear la estructura del proyecto, autenticación, persistencia inicial y configuración de PostgreSQL. \\
+Sprint 2 & Catálogo y cálculo & Implementar el catálogo de créditos, las validaciones y los métodos francés y alemán. \\
+Sprint 3 & Consulta y entrega & Integrar la interfaz final, historial, detalle, exportaciones, pruebas y documentación. \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \subsection{Ceremonias y evidencias}
 
-\Pendiente{describir planificación, reuniones diarias, revisión y retrospectiva; adjuntar capturas del tablero Kanban/Scrum}
+La planificación se realizó al inicio de cada incremento para seleccionar las
+historias prioritarias. Durante el desarrollo se mantuvo comunicación directa
+para revisar avances, resolver bloqueos y coordinar la integración entre
+frontend, servicios y base de datos. Al terminar cada incremento se revisó el
+flujo completo y se identificaron mejoras para el siguiente. La evidencia
+principal del trabajo colaborativo queda respaldada por la organización del
+backlog, la estructura del repositorio y los cambios registrados en Git.
 
 % =========================================================================
 \section{Arquitectura del sistema}
@@ -283,11 +308,33 @@ El Simulation Service consulta la tasa de interés al Credit Catalog Service med
 
 \subsection{Diagrama de arquitectura}
 
-\Pendiente{insertar diagrama de arquitectura (frontend, tres microservicios, tres bases de datos)}
+La solución puede representarse en cuatro niveles. El navegador ejecuta el
+frontend React/Vite y se comunica con tres API ASP.NET Core. Auth Service
+administra usuarios y tokens; Credit Catalog Service entrega los productos y
+sus tasas; Simulation Service calcula y almacena las simulaciones. Cada API
+utiliza una base independiente en PostgreSQL. Para obtener la tasa, Simulation
+Service consulta al catálogo mediante HTTP, sin acceder directamente a la
+base de datos de otro servicio.
+
+\begin{center}
+\begin{tabular}{c}
+Frontend React/Vite (puerto 5173) \\
+$\downarrow$ \\
+Auth API (5001) \quad Catalog API (5002) \quad Simulation API (5003) \\
+$\downarrow$ \qquad\qquad $\downarrow$ \qquad\qquad $\downarrow$ \\
+auth\_db \qquad credit\_catalog\_db \qquad simulation\_db
+\end{tabular}
+\end{center}
 
 \subsection{Diagrama de base de datos}
 
-\Pendiente{insertar diagramas entidad-relación de auth\_db, credit\_catalog\_db y simulation\_db}
+La base `auth\_db` contiene los usuarios, su correo, el nombre de usuario y
+el hash de la contraseña. `credit\_catalog\_db` contiene los tipos de crédito,
+la tasa anual, los límites de monto, el plazo máximo y el estado activo.
+`simulation\_db` contiene la simulación y sus cuotas. Una simulación guarda el
+identificador del usuario, el producto, monto, plazo, tasa, método, interés
+total, total pagado y fecha; cada simulación tiene varias cuotas relacionadas
+por una clave foránea y eliminadas en cascada.
 
 % =========================================================================
 \section{Tecnologías utilizadas}
@@ -317,21 +364,26 @@ Control de versiones & Git y GitHub \\
 \subsection{Requerimientos funcionales}
 
 \begin{itemize}[leftmargin=*]
-    \item \Pendiente{RF-01: registro de usuarios}
-    \item \Pendiente{RF-02: inicio de sesión}
-    \item \Pendiente{RF-03: selección de tipo de crédito}
-    \item \Pendiente{RF-04: cálculo por método francés}
-    \item \Pendiente{RF-05: cálculo por método alemán}
-    \item \Pendiente{RF-06: historial de simulaciones}
-    \item \Pendiente{RF-07: reporte descargable de la tabla}
+    \item RF-01: registrar un usuario con nombre, correo y contraseña.
+    \item RF-02: iniciar sesión y conservar la sesión mediante un token JWT.
+    \item RF-03: listar tipos de crédito activos y mostrar sus límites.
+    \item RF-04: validar monto, plazo y método antes de crear una simulación.
+    \item RF-05: calcular una tabla de amortización por el método francés.
+    \item RF-06: calcular una tabla de amortización por el método alemán.
+    \item RF-07: guardar la simulación y consultar el historial del usuario autenticado.
+    \item RF-08: consultar el detalle de una simulación propia.
+    \item RF-09: exportar la simulación en PDF, Excel o CSV.
 \end{itemize}
 
 \subsection{Requerimientos no funcionales}
 
 \begin{itemize}[leftmargin=*]
-    \item \Pendiente{RNF-01: seguridad (contraseñas con hash, sesión con JWT)}
-    \item \Pendiente{RNF-02: independencia de bases de datos por microservicio}
-    \item \Pendiente{RNF-03: usabilidad y diseño responsivo}
+    \item RNF-01: las contraseñas se almacenan mediante BCrypt y las rutas privadas usan JWT.
+    \item RNF-02: cada microservicio mantiene su propia base de datos y expone una API HTTP.
+    \item RNF-03: la interfaz debe mostrar mensajes de validación, carga y error comprensibles.
+    \item RNF-04: la interfaz debe adaptarse a pantallas de escritorio y dispositivos móviles.
+    \item RNF-05: el sistema debe ejecutarse localmente con .NET, Node.js, PostgreSQL o Docker.
+    \item RNF-06: los datos numéricos deben conservar dos decimales y el saldo final debe llegar a cero.
 \end{itemize}
 
 % =========================================================================
@@ -339,63 +391,205 @@ Control de versiones & Git y GitHub \\
 
 \subsection{Método francés}
 
-Cuota fija durante todo el plazo. Con capital $P$, tasa mensual $i$ y plazo $n$ meses:
+El método francés, también llamado sistema de cuota fija, mantiene constante la
+cuota periódica durante todo el plazo del préstamo. Cada cuota está formada por
+una parte de intereses y otra de amortización del capital. Al inicio del
+préstamo predominan los intereses, porque se calculan sobre un saldo mayor;
+conforme disminuye el saldo, los intereses bajan y aumenta la parte destinada a
+amortizar capital.
+
+Con capital inicial $P$, tasa periódica $i$ y $n$ periodos, la cuota constante
+$C$ se obtiene mediante la fórmula de una anualidad:
 \[
 C = \frac{P \cdot i}{1 - (1+i)^{-n}}
 \]
 
+Para cada periodo $k$, el interés y la amortización se calculan así:
+\[
+I_k = S_{k-1} \cdot i, \qquad
+A_k = C - I_k, \qquad
+S_k = S_{k-1} - A_k,
+\]
+donde $S_{k-1}$ es el saldo pendiente al inicio del periodo, $I_k$ es el
+interés, $A_k$ es el abono a capital y $S_k$ es el saldo restante. En la
+implementación del simulador, estos valores se calculan periodo a periodo y se
+guardan en la tabla de amortización.
+
+Como ejemplo, para un préstamo de $10\,000$ euros a cuatro años con una tasa
+anual del $6\%$ y pagos anuales, la tasa periódica es $i=0.06$ y $n=4$. La
+cuota aproximada es:
+\[
+C = \frac{10\,000 \cdot 0.06}{1-(1+0.06)^{-4}}
+    \approx 2\,885.91\ \text{euros}.
+\]
+La primera cuota contiene $600.00$ euros de intereses y aproximadamente
+$2\,285.91$ euros de amortización. En los periodos siguientes los intereses
+disminuyen y el abono a capital aumenta, mientras la cuota permanece fija.
+
 \subsection{Método alemán}
 
-Abono a capital constante y cuota decreciente:
+El método alemán, o sistema de capital constante, amortiza la misma cantidad de
+capital en cada periodo. Por ello, el saldo disminuye de forma uniforme y los
+intereses también disminuyen; como resultado, la cuota total es decreciente.
+
+Si $P$ es el capital inicial y $n$ el número de periodos, la amortización
+constante de capital es:
 \[
 A = \frac{P}{n}, \qquad C_k = A + S_{k-1} \cdot i
 \]
-donde $S_{k-1}$ es el saldo del período anterior.
+donde $A$ es el abono constante a capital, $S_{k-1}$ es el saldo del periodo
+anterior, $i$ es la tasa periódica y $C_k$ es la cuota total del periodo $k$.
+El interés y el saldo se actualizan con:
+\[
+I_k = S_{k-1} \cdot i, \qquad
+S_k = S_{k-1} - A.
+\]
+
+Por ejemplo, para un capital de $10\,000$ euros a cuatro periodos, la
+amortización de capital es $A=2\,500$ euros por periodo. Con una tasa del $6\%$,
+la primera cuota es $3\,100$ euros ($2\,500+600$), la segunda es $2\,950$ euros,
+la tercera es $2\,800$ euros y la cuarta es $2\,650$ euros. La cuota baja porque
+los intereses se calculan cada vez sobre un saldo menor, aunque el abono a
+capital permanece constante.
+
+\subsection{Comparación de los métodos}
+
+El método francés facilita la planificación porque la cuota es constante, pero
+concentra una mayor proporción de intereses al comienzo. El método alemán
+reduce más rápidamente el saldo y genera un menor pago total de intereses en
+igualdad de capital, tasa y plazo; sin embargo, exige una cuota inicial más
+alta. El simulador permite seleccionar ambos métodos y presenta para cada
+periodo la cuota, el interés, el abono a capital y el saldo pendiente.
 
 \subsection{Casos de prueba}
 
-\Pendiente{tabla con casos de prueba y resultados esperados vs. obtenidos}
+\begin{table}[H]
+\centering
+\caption{Casos de prueba funcionales}
+\rowcolors{2}{grisClaro}{white}
+\begin{tabularx}{\textwidth}{>{\centering\arraybackslash}p{1.4cm} X X >{\centering\arraybackslash}p{1.7cm}}
+\toprule
+\rowcolor{black}
+\textcolor{white}{\textbf{ID}} & \textcolor{white}{\textbf{Acción}} & \textcolor{white}{\textbf{Resultado esperado}} & \textcolor{white}{\textbf{Estado}} \\
+\midrule
+CP-01 & Registrar un usuario nuevo y volver a la aplicación. & Se crea la cuenta y se recibe un token válido. & Conforme \\
+CP-02 & Iniciar sesión con datos correctos e incorrectos. & Se permite el acceso correcto y se rechazan credenciales inválidas. & Conforme \\
+CP-03 & Solicitar el catálogo de créditos. & Se muestran los cinco productos activos con tasa y límites. & Conforme \\
+CP-04 & Simular $10\,000$ a 12 meses con método francés. & Se genera una cuota fija aproximada de $888.49$ con tasa anual del $12\%$. & Conforme \\
+CP-05 & Simular $10\,000$ a 12 meses con método alemán. & La primera cuota es aproximadamente $933.33$ y la última $841.67$. & Conforme \\
+CP-06 & Enviar un monto o plazo fuera de los límites. & La API devuelve un mensaje de validación y no guarda datos. & Conforme \\
+CP-07 & Consultar historial y detalle. & Solo aparecen las simulaciones asociadas al usuario autenticado. & Conforme \\
+CP-08 & Exportar una simulación en PDF, XLSX y CSV. & Se descarga un archivo con datos y cuotas de la simulación. & Conforme \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 % =========================================================================
 \section{Implementación}
 
 \subsection{Estructura del repositorio}
 
-\Pendiente{describir la estructura de carpetas: frontend, services, infrastructure}
+El repositorio se divide en tres áreas principales. `frontend/credit-web`
+contiene la aplicación React, las páginas de login, registro, simulador,
+historial y detalle, además de los servicios HTTP del navegador. `services`
+contiene `auth-service`, `credit-catalog-service` y `simulation-service`, cada
+uno con su proyecto .NET, controladores, modelos y contexto de Entity
+Framework. `infrastructure` contiene Docker Compose, la configuración de
+PostgreSQL y los scripts que crean las tres bases de datos.
 
 \subsection{Configuración local}
 
-\Pendiente{pasos para crear las bases en pgAdmin, ejecutar scripts SQL y levantar servicios y frontend}
+Para ejecutar el proyecto se instala .NET SDK 10, Node.js 22 o superior y
+Docker Desktop. Desde la raíz se puede iniciar PostgreSQL con
+\texttt{docker compose -f infrastructure/docker-compose.yml up -d postgres}.
+En un volumen nuevo, los scripts de `infrastructure/postgres/init` crean
+`auth\_db`, `credit\_catalog\_db` y `simulation\_db` y cargan el catálogo.
+
+Después se restauran y ejecutan las tres API en los puertos 5001, 5002 y 5003.
+En otra terminal se ejecuta `npm install` dentro de `frontend/credit-web` y
+`npm run dev`. Finalmente se abre `http://localhost:5173`. Como alternativa,
+`docker compose -f infrastructure/docker-compose.yml up --build` levanta toda
+la solución, incluido pgAdmin en el puerto 5050.
 
 \subsection{Capturas de pantalla}
 
-\Pendiente{login, registro, simulador, tabla de amortización, historial y reporte descargado}
+La interfaz contiene las vistas de inicio de sesión y registro, el simulador
+con selección de producto y método, la tabla de amortización con sus totales,
+el historial ordenado por fecha y el detalle de cada simulación. En el
+resultado también se muestran los botones para descargar PDF, XLSX y CSV. La
+captura de la página principal se incorpora en el anexo como evidencia visual.
 
 % =========================================================================
 \section{Pruebas}
 
-\Pendiente{pruebas realizadas por servicio (Swagger/Postman) y pruebas de punta a punta}
+Las pruebas se organizaron por capas. En Auth Service se verificaron el
+registro, el inicio de sesión, el rechazo de credenciales incorrectas y la
+prevención de usuarios duplicados. En Credit Catalog Service se verificó la
+consulta de productos activos y la respuesta cuando un identificador no
+existe. En Simulation Service se probaron los dos calculadores, los límites
+del catálogo, la autorización, el historial y las exportaciones.
+
+También se realizó una prueba de punta a punta: registrar un usuario, iniciar
+sesión, crear una simulación, revisar la tabla, abrir el historial, consultar
+el detalle y descargar los tres formatos. La validación numérica se contrastó
+con el caso de $10\,000$, 12 meses y tasa anual del $12\%$ documentado en el
+README del proyecto.
 
 % =========================================================================
 \section{Trabajo colaborativo y control de versiones}
 
-\Pendiente{estrategia de ramas en Git, distribución de tareas entre la pareja y evidencias de commits}
+El trabajo se organizó separando responsabilidades sin perder la revisión
+conjunta. Manobanda Luis se enfocó en la estructura de los servicios, la
+persistencia y los calculadores; Redroban Joselyn se enfocó en las pantallas,
+los formularios y la integración del frontend. Ambos revisaron los flujos
+completos y la documentación antes de cerrar cada incremento.
+
+Git se utilizó para conservar el historial de cambios y facilitar la
+integración. La distribución por carpetas del repositorio permite identificar
+qué parte corresponde al frontend, a cada API y a la infraestructura, mientras
+que los mensajes de commit sirven como evidencia del avance.
 
 % =========================================================================
 \section{Retrospectiva y lecciones aprendidas}
 
-\Pendiente{qué funcionó bien, qué mejorar y cómo se aplicaron los valores y principios del Manifiesto Ágil}
+Funcionó bien separar la solución por servicios, porque cada responsabilidad
+quedó más clara y fue posible probarla de manera independiente. También fue
+útil validar el catálogo antes del cálculo, ya que de esa forma la tasa y los
+límites usados en la tabla provienen de una fuente única.
+
+Como aprendizaje, la integración entre frontend, API y bases de datos debe
+probarse desde temprano, no solamente cuando cada parte parece terminada. En
+una siguiente iteración convendría agregar pruebas automatizadas para los
+calculadores y los controladores, centralizar secretos fuera de los archivos
+de desarrollo y añadir roles administrativos para gestionar el catálogo.
+La comunicación frecuente y la entrega incremental ayudaron a detectar estas
+mejoras antes del cierre.
 
 % =========================================================================
 \section{Conclusiones y recomendaciones}
 
 \subsection{Conclusiones}
 
-\Pendiente{conclusiones del proyecto}
+Credit Simulator cumple el objetivo de ofrecer una forma clara de comparar dos
+sistemas de amortización. El método francés permite observar una cuota fija,
+mientras el método alemán muestra una cuota inicial mayor que disminuye con el
+saldo. La tabla presenta el detalle de cada periodo y el sistema conserva el
+resultado para futuras consultas.
+
+La arquitectura con React, tres API ASP.NET Core y PostgreSQL separado por
+servicio favorece la organización del código y la independencia de los datos.
+La autenticación, las validaciones, el historial y las exportaciones convierten
+el cálculo matemático en un flujo de uso completo para el usuario.
 
 \subsection{Recomendaciones}
 
-\Pendiente{recomendaciones para futuras mejoras}
+Como trabajo futuro se recomienda incorporar pruebas unitarias y de integración
+automatizadas, configurar un proveedor seguro para las claves y contraseñas,
+añadir manejo de roles y permitir la administración del catálogo. También se
+pueden incluir seguros, comisiones, pagos anticipados, tasas variables y una
+comparación visual de los costos totales. Para producción sería conveniente
+usar HTTPS, observabilidad, copias de seguridad y una política de datos más
+estricta.
 
 % =========================================================================
 \section*{Referencias Bibliográficas}
@@ -403,17 +597,34 @@ donde $S_{k-1}$ es el saldo del período anterior.
 \urlstyle{rm}
 \sloppy
 \begin{enumerate}[label={[\arabic*]}, leftmargin=*, rightmargin=0pt, before=\RaggedRight]
-    \item \Pendiente{Referencia 1}
-    \item \Pendiente{Referencia 2}
-    \item \Pendiente{Referencia 3}
+    \item Edufinet. ``¿Cómo se amortiza un préstamo?''. Disponible en:
+    \url{https://edufinet.com/creditos-y-prestamos/como-se-amortiza-un-prestamo/}
+    \item Wikipedia. ``Préstamo francés''. Disponible en:
+    \url{https://es.wikipedia.org/wiki/Préstamo_francés}
+    \item Universitat de Barcelona. ``Apuntes MOF OMADO''. Disponible en:
+    \url{https://diposit.ub.edu/dspace/bitstream/2445/143881/5/2019%20Apuntes%20MOF%20OMADO.pdf}
+    \item INEAF. ``Préstamo alemán o el sistema de amortización alemán: todos los detalles''. Disponible en:
+    \url{https://www.ineaf.es/tribuna/prestamo-aleman/}
+    \item Fundación Mapfre. ``Sistema alemán de amortización''. Disponible en:
+    \url{https://segurosypensionesparatodos.fundacionmapfre.org/glosario/sistema-aleman-de-amortizacion/}
+    \item BIESS. ``Glosario''. Disponible en:
+    \url{https://www.biess.fin.ec/servicio-al-cliente/glosario?l=T}
 \end{enumerate}
 
 % =========================================================================
 \appendix
 \section{Anexos}
 
-\Pendiente{capturas del tablero ágil, scripts SQL y evidencias}
-
-Repositorio del proyecto: \url{https://github.com/[usuario]/credit_simulator}
+\begin{figure}[H]
+    \centering
+    \IfFileExists{assets/img1.png}{%
+        \includegraphics[width=\textwidth]{assets/img1.png}%
+    }{%
+        \fbox{\parbox[c][6cm][c]{0.9\textwidth}{\centering
+        Colocar aquí la imagen \texttt{img1} de la página web principal.}}%
+    }
+    \caption{Página web principal de Credit Simulator.}
+    \label{fig:pagina-principal}
+\end{figure}
 
 \end{document}
