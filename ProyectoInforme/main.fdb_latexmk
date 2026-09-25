@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1790282871.8841 "c:/Users/User/Documents/GitHub/credit_simulator/ProyectoInforme/main.tex" "main.pdf" "main" 1790282875.25511 2
+["pdflatex"] 1790284719.51182 "c:/Users/User/Documents/GitHub/credit_simulator/ProyectoInforme/main.tex" "main.pdf" "main" 1790284723.37545 2
   "C:/Program Files/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
   "C:/Program Files/MiKTeX/fonts/tfm/adobe/symbol/psyr.tfm" 1136790254 1408 5937f58aa508ea2cea4901c07d10f5fe ""
   "C:/Program Files/MiKTeX/fonts/tfm/adobe/times/psyro.tfm" 1136790254 1544 23a042a74981a3e4b6ce2e350e390409 ""
@@ -217,10 +217,10 @@
   "assets/img1.png" 1790272121 90030 bf56e3feb41c23f13afbbf1f99a4d3e1 ""
   "assets/logo_fisei.png" 1787948221 101467 945842f3a55bfbd4fde722e1fa4ec42c ""
   "assets/logo_uta.png" 1787948221 134825 4d300dacc47271080538e4a7e59aa92c ""
-  "c:/Users/User/Documents/GitHub/credit_simulator/ProyectoInforme/main.tex" 1790282871 28803 d79380c83aacf1e5b3714ac6d7b80e70 ""
-  "main.aux" 1790282874 6037 20c7f0746d4b278f86990d960fc574c7 "pdflatex"
-  "main.out" 1790282874 5756 3f444e0df02cf62e0397c0550157dc1c "pdflatex"
-  "main.tex" 1790282871 28803 d79380c83aacf1e5b3714ac6d7b80e70 ""
+  "c:/Users/User/Documents/GitHub/credit_simulator/ProyectoInforme/main.tex" 1790284716 28803 d79380c83aacf1e5b3714ac6d7b80e70 ""
+  "main.aux" 1790284722 6037 20c7f0746d4b278f86990d960fc574c7 "pdflatex"
+  "main.out" 1790284722 5756 3f444e0df02cf62e0397c0550157dc1c "pdflatex"
+  "main.tex" 1790284716 28803 d79380c83aacf1e5b3714ac6d7b80e70 ""
   (generated)
   "main.aux"
   "main.log"
